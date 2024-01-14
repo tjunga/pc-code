@@ -1,6 +1,7 @@
 package com.example.meepmeep;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeBlueDark;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeRedDark;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeRedLight;
@@ -88,13 +89,59 @@ public class MeepMeep {
                                 .waitSeconds(2)
                                 .build()
                 );
-        RoadRunnerBotEntity 
+        RoadRunnerBotEntity crazy = new DefaultBotBuilder(meepMeep)
+                .setColorScheme(new ColorSchemeRedLight())
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .followTrajectorySequence(drive ->
+                        drive.trajectorySequenceBuilder(new Pose2d(-34, -60, Math.toRadians(270)))
+                                .back(1)
+                                .lineToLinearHeading(new Pose2d(-34,-10, Math.toRadians(270)))
+                                .waitSeconds(1.5)
+                                .lineToLinearHeading(new Pose2d(-48, -19, Math.toRadians(180)))
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(-36, -58, Math.toRadians(0)))
+                                .forward(38)
+                                .splineToConstantHeading(new Vector2d(43, -33), Math.toRadians(0))
+                                .waitSeconds(1.5)
+                                .lineToLinearHeading(new Pose2d(10, -60, Math.toRadians(180)))
+                                .forward(35)
+                                .splineToConstantHeading(new Vector2d(-48, -28), Math.toRadians(0))
+                                .waitSeconds(1)
+                                .splineToConstantHeading(new Vector2d(-36,-60), Math.toRadians(0))
+                                .back(4*24)
+                                .waitSeconds(1)
+                                .forward(4*24)
+                                .splineToConstantHeading(new Vector2d(-48, -28), Math.toRadians(0))
+                                .waitSeconds(1)
+                                .splineToConstantHeading(new Vector2d(-36,-60), Math.toRadians(0))
+                                .back(4*24)
+                                .build()
+                );
+        RoadRunnerBotEntity teehee = new DefaultBotBuilder(meepMeep)
+                .setColorScheme(new ColorSchemeRedLight())
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .followTrajectorySequence(drive ->
+                        drive.trajectorySequenceBuilder(new Pose2d(-34, -60, Math.toRadians(270)))
+                                .back(1)
+                                .lineToLinearHeading(new Pose2d(-34,-10, Math.toRadians(270)))
+                                .waitSeconds(1.5)
+                                .lineToLinearHeading(new Pose2d(-40, -8, Math.toRadians(180)))
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(36, -8, Math.toRadians(0)))
+                                .splineToConstantHeading(new Vector2d(43,-33), Math.toRadians(0))
+                                .waitSeconds(2)
+                                .splineToLinearHeading(new Pose2d(36,-8, Math.toRadians(0)), Math.toRadians(0))
+                                .lineToLinearHeading(new Pose2d(-40,-8, Math.toRadians(180)))
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(36, -8, Math.toRadians(0)))
+                                .splineToConstantHeading(new Vector2d(43,-33), Math.toRadians(0))
+                                .waitSeconds(2)
+                                .build()
+                );
         meepMeep.setBackground(com.noahbres.meepmeep.MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
-                .addEntity(auto)
-                .addEntity(mySecondBot)
-                .addEntity(myThirdBot)
+                .addEntity(teehee)
                 .start();
     }
 }
