@@ -23,7 +23,7 @@ public class MeepMeep {
                                 .turn(Math.toRadians(90))
                                 .forward(18)
                                 .waitSeconds(2)
-                                .back(85)
+                                .lineTo(new Vector2d(55,10))
                                 .splineToLinearHeading(new Pose2d(47, 38, Math.toRadians(0)), Math.toRadians(0))
                                 .waitSeconds(3)
                                 .strafeLeft(20)
@@ -100,7 +100,7 @@ public class MeepMeep {
                                 .lineToLinearHeading(new Pose2d(-48, -19, Math.toRadians(180)))
                                 .waitSeconds(1)
                                 .lineToLinearHeading(new Pose2d(-36, -58, Math.toRadians(0)))
-                                .forward(38)
+                                .forward(55)
                                 .splineToConstantHeading(new Vector2d(43, -33), Math.toRadians(0))
                                 .waitSeconds(1.5)
                                 .lineToLinearHeading(new Pose2d(10, -60, Math.toRadians(180)))
@@ -138,10 +138,33 @@ public class MeepMeep {
                                 .waitSeconds(2)
                                 .build()
                 );
+        RoadRunnerBotEntity backstage = new DefaultBotBuilder(meepMeep)
+                .setColorScheme(new ColorSchemeRedLight())
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .followTrajectorySequence(drive ->
+                        drive.trajectorySequenceBuilder(new Pose2d(12, -60, Math.toRadians(270)))
+                                .lineToLinearHeading(new Pose2d(43,-33, Math.toRadians(0)))
+                                .waitSeconds(1.5)
+                                .lineToLinearHeading(new Pose2d(12,-10, Math.toRadians(270)))
+                                .waitSeconds(2)
+                                .lineToLinearHeading(new Pose2d(-40,-8, Math.toRadians(180)))
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(36, -8, Math.toRadians(0)))
+                                .splineToConstantHeading(new Vector2d(43,-33), Math.toRadians(0))
+                                .waitSeconds(2)
+                                .strafeTo(new Vector2d(36,-8))
+                                .lineToLinearHeading(new Pose2d(-40,-8, Math.toRadians(180)))
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(36, -8, Math.toRadians(0)))
+                                .strafeTo(new Vector2d(43,-33))
+                                .waitSeconds(2)
+                                .build()
+
+                );
         meepMeep.setBackground(com.noahbres.meepmeep.MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
-                .addEntity(teehee)
+                .addEntity(backstage)
                 .start();
     }
 }
