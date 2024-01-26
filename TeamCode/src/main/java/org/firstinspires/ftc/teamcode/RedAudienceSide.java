@@ -113,7 +113,7 @@ public class RedAudienceSide extends LinearOpMode {
             telemetry.update();
             int position = pipeline.getPosition();
             mech.closeClaws();
-            wait(1500);
+            wait(500);
             if (position == 1) {
                 drive.followTrajectorySequence(purplepixel1);
                 drive.turn(Math.toRadians(-45));

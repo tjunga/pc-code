@@ -399,7 +399,7 @@ public class Mechanisms {
     public void wait(int ms) {
         ElapsedTime timer = new ElapsedTime();
         timer.startTime();
-        while (timer.milliseconds() < ms) {
+        while (timer.milliseconds() < ms && opMode.opModeIsActive()) {
             opMode.telemetry.update();
         }
     }
